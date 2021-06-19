@@ -15,7 +15,6 @@ function App() {
     <Container>
       {loading && <h1>Loading...</h1>}
       {error && <h1>Error... Try Refreshing Your Page</h1>}
-     {/* {employee && <h1>{employee.length}</h1>} */}
       {employee.map(name => {
         return <People key={name.id.value} name={name}/>
       })}
