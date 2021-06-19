@@ -27,15 +27,23 @@ function reducer(state, action) {
 export default function useFetchEmployee(params, page) {
    const [state, dispatch] = useReducer(reducer, {employee: [], loading: true })
 
-   useEffect(() => {
+   useEffect(() => { 
+      const cancelToken = axios.CancelToken.source() 
       dispatch({ type: ACTIONS.MAKE_REQUEST })
       axios.get(BASE, {
+          cancelToken: cancelToken.token,
           params: { markdown: true, page: page, ...params }
       }).then(res => {
+          console.log(res)
           dispatch({ type: ACTIONS.GET_DATA, payload: {employee: res.data.results}})
       }).catch(e => {
+          if (axios.isCancel(e)) return
           dispatch({ type: ACTIONS.ERROR, payload: { error: e }})
       })
+
+      return () => {
+          cancelToken.cancel()
+      }
    }, [params, page])
 
    return state
