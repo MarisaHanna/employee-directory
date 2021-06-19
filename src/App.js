@@ -1,24 +1,18 @@
+import React from 'react'
 import logo from './logo.svg';
 import './App.css';
+import useFetchEmployee from './fetchEmployee';
+import { Container } from 'react-bootstrap';
 
 function App() {
+  const {employee, loading, error } = useFetchEmployee()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Container>
+      {loading && <h1>Loading...</h1>}
+      {error && <h1>Error... Try Refreshing Your Page</h1>}
+      {employee && <h1>{ employee.length}</h1>}
+    </Container>
   );
 }
 
