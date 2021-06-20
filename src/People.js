@@ -10,7 +10,10 @@ export default function People({name}) {
                     <Card.Title>
                         {name.name.first}<span> </span>{name.name.last} - <span className='text-muted font-weight-light'>Age {name.dob.age}</span>
                     </Card.Title>
-                </div>
+                    <Card.Subtitle>
+                       {name.email} 
+                    </Card.Subtitle>
+                  </div>  
              </div>  
            </Card.Body>
         </Card> 
