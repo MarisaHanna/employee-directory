@@ -11,9 +11,12 @@ export default function People({name}) {
                         {name.name.first}<span> </span>{name.name.last} - <span className='text-muted font-weight-light'>Age {name.dob.age}</span>
                     </Card.Title>
                     <Card.Subtitle>
-                       {name.email} 
+                        <h6>Email : <a href={`mailto:${name.email}`}>{name.email}</a></h6>
+                        <h6>Phone : {name.cell}</h6>
+                       
                     </Card.Subtitle>
                   </div>  
+                   <img src= {name.picture.medium}/>                   
              </div>  
            </Card.Body>
         </Card> 
