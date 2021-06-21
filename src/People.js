@@ -18,7 +18,7 @@ export default function People({name}) {
                         
                     </Card.Title>
                     <Card.Subtitle>
-                      <Badge variant='secondary' className='mb-4'> Employee Number: {name.id.value}
+                      <Badge variant='secondary' className='mb-4'> Employee ID: {name.id.value}
 
                       </Badge>
                        
