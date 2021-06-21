@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Badge, Button, Collapse} from 'react-bootstrap'
-import images from '../src/components/images/logo.png'
+import images from '../../images/logo.png'
 
 
 
@@ -9,7 +9,7 @@ export default function People({name}) {
     
   
     return (
-       <Card>
+       <Card className= 'mb-3 border-secondary'>
            <Card.Body>
              <div className= 'd-flex justify-content-between'>
                 <div>
@@ -19,16 +19,17 @@ export default function People({name}) {
                     </Card.Title>
                     <Card.Subtitle>
                       <Badge variant='secondary' className='mb-4'> Employee ID: {name.id.value}
-
                       </Badge>
                        
                     </Card.Subtitle>
                     <Card.Text>
-                        <Button onClick= {() => setOpen(prevOpen => !prevOpen)}variant= 'primary'>View Details</Button>
+                        <Button onClick= {() => setOpen(prevOpen => !prevOpen)}variant= 'primary'>
+                        {open ? 'Hide Details' : 'View Details'}
+                        </Button>
                     </Card.Text>
                     <Collapse in={open}>
                         <div className= 'mt-4'>
-                             <img src= {name.picture.medium}/> 
+                             <img alt={name.name.first}src= {name.picture.medium}/> 
                              <h6 className= 'mt-4'>DOB : {new Date(name.dob.date).toLocaleDateString()}</h6>
                              <h6>Email : <a href={`mailto:${name.email}`}>{name.email}</a></h6> 
                              <h6>Phone : {name.cell}</h6>
@@ -36,9 +37,10 @@ export default function People({name}) {
                         </div>
                     </Collapse>
                   </div>  
-                   <img height= '70' src= {images}/>                   
+                   <img className= 'd-none d-md-block' height= '120' alt={images} src= {images}/>                   
              </div>  
            </Card.Body>
         </Card> 
+
     )
 }

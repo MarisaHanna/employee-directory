@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import logo from './logo.svg';
 import './App.css';
-import useFetchEmployee from './fetchEmployee';
+import useFetchEmployee from './utils/fetchEmployee';
 import { Container } from 'react-bootstrap';
-import People from './People';
+import People from './components/People/People';
 
 function App() {
 
@@ -12,7 +11,7 @@ function App() {
   const {employee, loading, error } = useFetchEmployee(params, page)
   return (
 
-    <Container>
+    <Container className= 'my-4'>
       {loading && <h1>Loading...</h1>}
       {error && <h1>Error... Try Refreshing Your Page</h1>}
       {employee.map(name => {
