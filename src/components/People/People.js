@@ -6,8 +6,8 @@ import images from '../../images/logo.png'
 
 export default function People({name}) {
     const [open, setOpen] = useState(false)
-    
-  
+   
+
     return (
        <Card className= 'mb-3 border-secondary'>
            <Card.Body>
@@ -20,8 +20,7 @@ export default function People({name}) {
                     <Card.Subtitle>
                       <Badge variant='secondary' className='mb-4'> Employee ID: {name.id.value}
                       </Badge>
-                       
-                    </Card.Subtitle>
+                     </Card.Subtitle>
                     <Card.Text>
                         <Button onClick= {() => setOpen(prevOpen => !prevOpen)}variant= 'primary'>
                         {open ? 'Hide Details' : 'View Details'}

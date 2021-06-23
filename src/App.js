@@ -1,38 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
-import useFetchEmployee from './utils/fetchEmployee';
-import { Container, Pagination } from 'react-bootstrap';
+import API from './utils/API'
+import { Container } from 'react-bootstrap';
 import People from './components/People/People';
 import SearchForm from './components/Search/SearchForm';
-import NewPage from './components/NewPage/NewPage';
+import Header from './components/Header/Header';
+
 
 function App() {
 
-  const [params, setParams] = useState({})
-  const [page, setPage] = useState(1)
-  const {employee, loading, error, nextPage } = useFetchEmployee(params, page)
+  const [params, setParams] = useState({})  
+  const [loading, setLoading] = useState('')
+  const [employee, setEmployee] = useState([])
+  const [search, setSearch] = useState('')
+  const [filteredEmployee, setFilteredEmployee] = useState([])
+  
+
+  const handleChange = e  => {
+      setSearch(
+        e.target.value
+)}
+
+  useEffect(() => {
+    setLoading(true);
+    API.getUsers()
+    .then(res => {
+     setEmployee(res.data.results)
+    setLoading(false)
+  
+}).catch(err => {
+  console.log(err)
+})
+}, [])  
 
 
-const handleChange = e  => {
-  const param = e.target.name
-  const value = e.target.value
-// setPage(1)
-  setParams(prevParams => {
-    return { ...prevParams, [param]: value }
-  })
-}
+  useEffect(() => {
+    setFilteredEmployee(
+      employee.filter (name => {
+        return name.name.first.toLowerCase().includes(search.toLowerCase()) ||name.location.state.toLowerCase().includes(search.toLocaleLowerCase())
+      })
+    )
+  }, [search, employee])
+
 
   return (
 
-    <Container className= 'my-4'>
+    <Container className= 'my-1'>
+      <Header/>
       <SearchForm params={params} onParamChange={handleChange}/>
-      <NewPage page={page} setPage={setPage} nextPage={nextPage}/>
-      {loading && <h1>Loading...</h1>}
-      {error && <h1>Error... Try Refreshing Your Page</h1>}
-      {employee.map(name => {
-        return <People key={name.id.value} name={name}/>
+       {loading && <h1>Loading...</h1>} 
+      {filteredEmployee.map(name => {
+        return <People key={name.id.value} name={name} />
       })}
-       <NewPage page={page} setPage={setPage} nextPage={nextPage}/>
     </Container>
   );
 }

@@ -1,0 +1,13 @@
+.jumbotron-fluid {
+
+    margin-bottom: 4%;
+    display: block;
+    text-align: center;
+    border-radius: 8px;
+    background: radial-gradient(circle, rgb(160, 238, 177) 0%, rgba(92, 189, 92, 0.954) 100%);
+}
+
+.header {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3rem;
+}
