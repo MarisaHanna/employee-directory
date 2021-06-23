@@ -29,7 +29,9 @@ This project simutales an application that allows the user to search for all emp
 #      Dependencies 
 
 
+* axios
 * react-bootstrap
+
 
 
 
